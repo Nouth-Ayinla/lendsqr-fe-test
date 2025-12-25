@@ -1,0 +1,237 @@
+@use 'sass:color';
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// Color variables for login page
+$login-primary: #39CDCC;
+$login-dark-blue: #213F7D;
+$login-light-gray: #F5F5F5;
+$login-border: #D3D3D3;
+$login-text-secondary: #718096;
+
+.login {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: 0;
+  padding: 0;
+
+  &__left {
+    flex: 1;
+    background: color.adjust($white, $lightness: -2%);
+    @include flex-center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xl;
+    padding: $spacing-xxl;
+    position: relative;
+    max-width: 50%;
+    border-right: none;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__logo {
+    position: absolute;
+    top: $spacing-xxl;
+    left: calc(50% - 300px + $spacing-xl);
+    transform: none;
+    height: 32px;
+    margin-bottom: 0;
+    margin-left: 0;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  &__illustration {
+    max-width: 600px;
+    width: 100%;
+    margin-top: $spacing-lg;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__right {
+    flex: 1;
+    background: $white;
+    @include flex-center;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xxl;
+    padding-top: $spacing-lg;
+    max-width: 50%;
+
+    @include tablet {
+      padding: $spacing-lg;
+      max-width: 100%;
+    }
+  }
+
+  &__container {
+    width: 100%;
+    max-width: 447px;
+    margin: 0 auto;
+  }
+
+  &__header {
+    margin-bottom: $spacing-xxl;
+
+    @include tablet {
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__title {
+    font-family: "Avenir Next", "Segoe UI", sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 100%;
+    letter-spacing: -0.04em;
+    color: $login-dark-blue;
+    margin-bottom: $spacing-sm;
+
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    color: $login-text-secondary;
+    font-weight: 400;
+  }
+
+  &__form {
+    @include flex-column;
+    gap: $spacing-lg;
+  }
+
+  &__form-group {
+    @include flex-column;
+    gap: $spacing-sm;
+  }
+
+  &__label {
+    font-size: $font-size-md;
+    font-weight: $font-weight-medium;
+    color: $text-secondary;
+  }
+
+  &__input-wrapper {
+    position: relative;
+  }
+
+  &__input {
+    @include input;
+    border: 2px solid $login-border;
+    padding: 12px 16px;
+    height: 50px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 447px;
+    font-size: 14px;
+    background-color: $white;
+    color: $text-primary;
+
+    &::placeholder {
+      color: $login-text-secondary;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $login-primary;
+    }
+
+    &--error {
+      border-color: $error;
+    }
+  }
+
+  &__password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: $login-primary;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0;
+    letter-spacing: 0.05em;
+  }
+
+  &__error {
+    color: $error;
+    font-size: $font-size-sm;
+    margin-top: 4px;
+  }
+
+  &__forgot {
+    color: $login-primary;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: $spacing-sm;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    max-width: 447px;
+    height: 48px;
+    padding: 0 18px;
+    background-color: $login-primary;
+    color: $white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    margin-top: $spacing-sm;
+    transition: background-color 0.3s ease;
+
+    &:hover:not(:disabled) {
+      background-color: #2fb8b7;
+    }
+
+    &:disabled {
+      background-color: rgba($login-primary, 0.5);
+      cursor: not-allowed;
+    }
+  }
+}
+
+.mobile-logo {
+  display: none;
+  text-align: center;
+  margin-bottom: $spacing-xl;
+
+  @include tablet {
+    display: block;
+  }
+
+  img {
+    height: 30px;
+  }
+}

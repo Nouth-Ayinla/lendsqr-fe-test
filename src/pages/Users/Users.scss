@@ -1,0 +1,316 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.users {
+  margin-top: 80px;
+  margin-left: 283px;
+  padding: $spacing-xl $spacing-xl;
+  min-height: calc(100vh - 80px);
+  background: $background-light;
+
+  @include tablet {
+    margin-left: 0;
+    padding: $spacing-lg;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: $font-weight-medium;
+    color: $text-primary;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__table-wrapper {
+    background: $white;
+    border-radius: $border-radius-sm;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.04);
+    padding: 0;
+    overflow-x: auto;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1000px;
+
+    thead {
+      background: $white;
+
+      tr {
+        border-bottom: 1px solid rgba($border-color, 0.3);
+      }
+
+      th {
+        text-align: left;
+        padding: 20px 24px;
+        font-size: 12px;
+        font-weight: $font-weight-semibold;
+        color: $text-secondary;
+        text-transform: uppercase;
+        white-space: nowrap;
+        position: relative;
+        letter-spacing: 0.04em;
+
+        &:hover .users__filter-icon {
+          opacity: 1;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid rgba($border-color, 0.2);
+        transition: background-color 0.15s ease;
+
+        &:hover {
+          background-color: rgba($primary-color, 0.015);
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      td {
+        padding: 22px 24px;
+        font-size: 14px;
+        color: $text-secondary;
+        font-weight: 400;
+      }
+    }
+  }
+
+  &__filter-icon {
+    cursor: pointer;
+    margin-left: 10px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__status {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: capitalize;
+
+    &--active {
+      background: rgba(57, 205, 98, 0.1);
+      color: #39cd62;
+    }
+
+    &--inactive {
+      background: rgba(84, 95, 125, 0.1);
+      color: #545f7d;
+    }
+
+    &--pending {
+      background: rgba(233, 178, 0, 0.1);
+      color: #e9b200;
+    }
+
+    &--blacklisted {
+      background: rgba(228, 3, 59, 0.1);
+      color: #e4033b;
+    }
+  }
+
+  &__actions {
+    position: relative;
+  }
+
+  &__actions-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 4px;
+    color: $text-secondary;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  &__pagination {
+    @include flex-between;
+    padding: $spacing-lg;
+    margin-top: $spacing-lg;
+
+    @include mobile {
+      flex-direction: column;
+      gap: $spacing-md;
+    }
+  }
+
+  &__pagination-info {
+    @include flex-start;
+    gap: $spacing-md;
+    font-size: $font-size-md;
+    color: $text-secondary;
+  }
+
+  &__pagination-select {
+    padding: 8px 12px;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-md;
+    outline: none;
+    background: $white;
+    cursor: pointer;
+  }
+
+  &__pagination-buttons {
+    @include flex-start;
+    gap: $spacing-sm;
+  }
+
+  &__pagination-button {
+    padding: 8px 12px;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-sm;
+    background: $white;
+    color: $text-secondary;
+    cursor: pointer;
+    font-size: $font-size-md;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background: $primary-color;
+      color: $white;
+      border-color: $primary-color;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &--active {
+      background: $primary-color;
+      color: $white;
+      border-color: $primary-color;
+    }
+  }
+
+  &__loading {
+    text-align: center;
+    padding: $spacing-xxl;
+    font-size: $font-size-lg;
+    color: $text-secondary;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: $spacing-xxl;
+    font-size: $font-size-lg;
+    color: $text-secondary;
+  }
+}
+
+// Filter Popup
+.filter-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-lg;
+  padding: $spacing-lg;
+  width: 270px;
+  z-index: 1000;
+  margin-top: 8px;
+
+  &__form {
+    @include flex-column;
+    gap: $spacing-md;
+  }
+
+  &__field {
+    @include flex-column;
+    gap: $spacing-xs;
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $text-secondary;
+  }
+
+  &__input,
+  &__select {
+    @include input;
+    padding: 10px 12px;
+    font-size: $font-size-sm;
+  }
+
+  &__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-sm;
+    margin-top: $spacing-md;
+  }
+
+  &__button {
+    padding: 10px;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &--reset {
+      background: transparent;
+      border: 1px solid $text-secondary;
+      color: $text-secondary;
+
+      &:hover {
+        background: $text-secondary;
+        color: $white;
+      }
+    }
+
+    &--filter {
+      @include button($primary-color, $white);
+      padding: 10px;
+    }
+  }
+}
+
+// Actions Menu
+.actions-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  box-shadow: $shadow-md;
+  padding: $spacing-sm 0;
+  min-width: 180px;
+  z-index: 1000;
+  margin-top: 4px;
+
+  &__item {
+    padding: 12px $spacing-lg;
+    font-size: $font-size-md;
+    color: $text-secondary;
+    cursor: pointer;
+    @include flex-start;
+    gap: 12px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba($primary-color, 0.05);
+    }
+
+    &-icon {
+      font-size: 16px;
+    }
+  }
+}
