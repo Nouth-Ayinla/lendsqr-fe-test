@@ -606,6 +606,7 @@
     font-weight: $font-weight-medium;
     color: $text-secondary;
     word-break: break-word;
+    min-width: 0;
 
     @include mobile {
       font-size: $font-size-sm;
@@ -618,10 +619,15 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
-    display: inline-block;
-    min-width: 0; // allow flex item to shrink so ellipsis works
+    display: block;
+    flex-shrink: 0;
     word-break: normal;
     overflow-wrap: normal;
+  }
+
+  // Prevent email items from wrapping
+  .user-details__info-item:has(.user-details__info-value--email) {
+    flex-wrap: nowrap;
   }
 
   &__loading,
