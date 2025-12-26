@@ -287,6 +287,7 @@
   box-shadow: $shadow-lg;
   max-width: 1100px;
   overflow: visible;
+  position: relative;
 
   @include mobile {
     padding: $spacing-sm;
@@ -523,7 +524,8 @@
 .dashboard__filter-panel {
   position: absolute;
   width: 270px;
-  height: 600px;
+  height: auto;
+  max-height: 600px;
   background: $white;
   border: 1px solid rgba($text-secondary, 0.2);
   border-radius: 4px;
@@ -533,6 +535,7 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  top: 55px;
 
   form {
     display: grid;
