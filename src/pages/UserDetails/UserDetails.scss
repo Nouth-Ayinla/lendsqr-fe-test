@@ -167,16 +167,7 @@
     }
   }
 
-  // When actions are placed inside the profile card, push them to the right on wide screens
-  &__actions--in-card {
-    margin-left: auto;
-
-    @include tablet {
-      margin-left: 0;
-      width: 100%;
-      justify-content: flex-start;
-    }
-  }
+  // Actions are rendered in the page header; no in-card modifier
 
   &__avatar {
     width: 100px;

@@ -79,6 +79,20 @@ const UserDetails: React.FC = () => {
 
       <div className="user-details__header">
         <h1 className="user-details__title">User Details</h1>
+        <div className="user-details__actions">
+          <button
+            className="user-details__action-button user-details__action-button--blacklist"
+            onClick={handleBlacklistUser}
+          >
+            Blacklist User
+          </button>
+          <button
+            className="user-details__action-button user-details__action-button--activate"
+            onClick={handleActivateUser}
+          >
+            Activate User
+          </button>
+        </div>
       </div>
 
       <div className="user-details__profile-card">
@@ -121,20 +135,7 @@ const UserDetails: React.FC = () => {
             </span>
           </div>
 
-          <div className="user-details__actions user-details__actions--in-card">
-            <button
-              className="user-details__action-button user-details__action-button--blacklist"
-              onClick={handleBlacklistUser}
-            >
-              Blacklist User
-            </button>
-            <button
-              className="user-details__action-button user-details__action-button--activate"
-              onClick={handleActivateUser}
-            >
-              Activate User
-            </button>
-          </div>
+          {/* Actions moved back to page header */}
         </div>
 
         <div className="user-details__tabs-wrapper">
