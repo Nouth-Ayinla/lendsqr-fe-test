@@ -97,18 +97,16 @@ const Dashboard: React.FC = () => {
       return;
     }
 
-    const wrapperRect = tableWrapperRef.current?.getBoundingClientRect();
     const buttonRect = (
       event.currentTarget as HTMLElement
     ).getBoundingClientRect();
-    if (wrapperRect) {
-      const buttonCenter =
-        buttonRect.left - wrapperRect.left + buttonRect.width / 2;
-      setFilterPos({
-        left: buttonCenter - PANEL_WIDTH / 2,
-        top: buttonRect.bottom - wrapperRect.top + 8,
-      });
-    }
+    
+    // Position relative to viewport, then adjust to be inside the panel
+    const buttonCenter = buttonRect.left + buttonRect.width / 2;
+    setFilterPos({
+      left: Math.max(16, buttonCenter - PANEL_WIDTH / 2), // Keep 16px margin from left
+      top: buttonRect.bottom + 12, // Position below the button
+    });
     setFilterOpen(true);
   };
   const closeFilter = () => setFilterOpen(false);
