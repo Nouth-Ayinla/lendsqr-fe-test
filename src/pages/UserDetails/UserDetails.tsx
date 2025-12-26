@@ -79,20 +79,6 @@ const UserDetails: React.FC = () => {
 
       <div className="user-details__header">
         <h1 className="user-details__title">User Details</h1>
-        <div className="user-details__actions">
-          <button
-            className="user-details__action-button user-details__action-button--blacklist"
-            onClick={handleBlacklistUser}
-          >
-            Blacklist User
-          </button>
-          <button
-            className="user-details__action-button user-details__action-button--activate"
-            onClick={handleActivateUser}
-          >
-            Activate User
-          </button>
-        </div>
       </div>
 
       <div className="user-details__profile-card">
@@ -133,6 +119,21 @@ const UserDetails: React.FC = () => {
             <span className="user-details__bank-details">
               9912345678/Providus Bank
             </span>
+          </div>
+
+          <div className="user-details__actions user-details__actions--in-card">
+            <button
+              className="user-details__action-button user-details__action-button--blacklist"
+              onClick={handleBlacklistUser}
+            >
+              Blacklist User
+            </button>
+            <button
+              className="user-details__action-button user-details__action-button--activate"
+              onClick={handleActivateUser}
+            >
+              Activate User
+            </button>
           </div>
         </div>
 
@@ -209,7 +210,9 @@ const UserDetails: React.FC = () => {
               </div>
               <div className="user-details__info-item">
                 <span className="user-details__info-label">Email Address</span>
-                <span className="user-details__info-value">{user.email}</span>
+                <span className="user-details__info-value user-details__info-value--email">
+                  {user.email}
+                </span>
               </div>
               <div className="user-details__info-item">
                 <span className="user-details__info-label">BVN</span>
@@ -344,7 +347,7 @@ const UserDetails: React.FC = () => {
               </div>
               <div className="user-details__info-item">
                 <span className="user-details__info-label">Email Address</span>
-                <span className="user-details__info-value">
+                <span className="user-details__info-value user-details__info-value--email">
                   {user.guarantorEmail}
                 </span>
               </div>
@@ -372,7 +375,7 @@ const UserDetails: React.FC = () => {
               </div>
               <div className="user-details__info-item">
                 <span className="user-details__info-label">Email Address</span>
-                <span className="user-details__info-value">
+                <span className="user-details__info-value user-details__info-value--email">
                   {user.guarantor2Email ?? user.guarantorEmail}
                 </span>
               </div>
