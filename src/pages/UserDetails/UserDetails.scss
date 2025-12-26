@@ -519,7 +519,7 @@
 
     // Four columns to fit the guarantor fields neatly on one line
     .user-details__info-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: 1fr 1.2fr 1.5fr 1fr;
       column-gap: $spacing-xl;
       row-gap: $spacing-md;
     }
