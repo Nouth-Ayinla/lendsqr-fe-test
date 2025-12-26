@@ -13,6 +13,8 @@
   z-index: 100;
   transition: transform 0.3s ease;
   color: $text-secondary;
+  display: flex;
+  flex-direction: column;
 
   @include tablet {
     transform: translateX(-100%);
@@ -136,10 +138,14 @@
 
   &__nav {
     padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   &__section {
     margin-bottom: $spacing-lg;
+    flex-shrink: 0;
   }
 
   &__section-title {
@@ -240,6 +246,58 @@
   color: $text-primary;
 }
 
+.sidebar__logout {
+  padding: $spacing-lg;
+  border-top: 1px solid $border-color;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.sidebar__logout-btn {
+  width: 100%;
+  @include flex-start;
+  gap: 12px;
+  padding: $spacing-md;
+  background: transparent;
+  border: none;
+  color: $text-primary;
+  cursor: pointer;
+  font-size: $font-size-md;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(#E74C3C, 0.1);
+    color: #E74C3C;
+    outline: none;
+  }
+
+  &:active {
+    background-color: rgba(#E74C3C, 0.15);
+  }
+}
+
+.sidebar__logout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: currentColor;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.sidebar__logout-text {
+  font-weight: $font-weight-normal;
+  white-space: nowrap;
+}
+
 .sidebar-overlay {
   display: none;
   position: fixed;
@@ -256,3 +314,4 @@
     }
   }
 }
+
