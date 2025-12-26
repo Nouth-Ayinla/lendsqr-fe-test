@@ -97,16 +97,19 @@ const Dashboard: React.FC = () => {
       return;
     }
 
+    const wrapperRect = tableWrapperRef.current?.getBoundingClientRect();
     const buttonRect = (
       event.currentTarget as HTMLElement
     ).getBoundingClientRect();
-    
-    // Position relative to viewport, then adjust to be inside the panel
-    const buttonCenter = buttonRect.left + buttonRect.width / 2;
-    setFilterPos({
-      left: Math.max(16, buttonCenter - PANEL_WIDTH / 2), // Keep 16px margin from left
-      top: buttonRect.bottom + 12, // Position below the button
-    });
+
+    if (wrapperRect) {
+      const buttonCenter =
+        buttonRect.left - wrapperRect.left + buttonRect.width / 2;
+      setFilterPos({
+        left: Math.max(16, buttonCenter - PANEL_WIDTH / 2),
+        top: buttonRect.bottom - wrapperRect.top + 12,
+      });
+    }
     setFilterOpen(true);
   };
   const closeFilter = () => setFilterOpen(false);
@@ -596,7 +599,7 @@ const Dashboard: React.FC = () => {
         {/* Mobile Card View */}
         <div className="dashboard__mobile-cards">
           {loading && <div className="dashboard__loading">Loading...</div>}
-          
+
           {!loading && displayedUsers.length === 0 && (
             <div className="dashboard__empty">No users found yet.</div>
           )}
@@ -605,25 +608,35 @@ const Dashboard: React.FC = () => {
             displayedUsers.map((user) => (
               <div key={user.id} className="dashboard__user-card">
                 <div className="dashboard__user-card-header">
-                  <div className="dashboard__user-card-name">{user.username}</div>
+                  <div className="dashboard__user-card-name">
+                    {user.username}
+                  </div>
                   <span
                     className={`dashboard__status dashboard__status--${user.status}`}
                   >
                     {user.status}
                   </span>
                 </div>
-                <div className="dashboard__user-card-org">{user.organization}</div>
+                <div className="dashboard__user-card-org">
+                  {user.organization}
+                </div>
                 <div className="dashboard__user-card-row">
                   <span className="dashboard__user-card-label">Email</span>
-                  <span className="dashboard__user-card-value">{user.email}</span>
+                  <span className="dashboard__user-card-value">
+                    {user.email}
+                  </span>
                 </div>
                 <div className="dashboard__user-card-row">
                   <span className="dashboard__user-card-label">Phone</span>
-                  <span className="dashboard__user-card-value">{user.phoneNumber}</span>
+                  <span className="dashboard__user-card-value">
+                    {user.phoneNumber}
+                  </span>
                 </div>
                 <div className="dashboard__user-card-row">
                   <span className="dashboard__user-card-label">Joined</span>
-                  <span className="dashboard__user-card-value">{formatDate(user.dateJoined)}</span>
+                  <span className="dashboard__user-card-value">
+                    {formatDate(user.dateJoined)}
+                  </span>
                 </div>
                 <button
                   type="button"

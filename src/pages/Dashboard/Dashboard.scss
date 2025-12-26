@@ -287,6 +287,7 @@
   box-shadow: $shadow-lg;
   max-width: 1100px;
   overflow: visible;
+  position: relative;
 
   @include mobile {
     padding: $spacing-sm;
@@ -521,7 +522,7 @@
 
 // Filter panel overlay
 .dashboard__filter-panel {
-  position: fixed;
+  position: absolute;
   width: 270px;
   height: auto;
   max-height: 600px;
