@@ -139,6 +139,8 @@
 
   &__profile-card {
     @include card;
+    width: 100%;
+    max-width: 1037px;
     margin-bottom: $spacing-lg;
 
     @include mobile {
