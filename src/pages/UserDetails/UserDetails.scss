@@ -469,6 +469,35 @@
     @include mobile {
       min-height: auto;
     }
+
+    // Single column grid for clarity
+    .user-details__info-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: $spacing-xl;
+      row-gap: $spacing-md;
+    }
+
+    // Inline label + value, but allow wrapping when content is long
+    .user-details__info-item {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: $spacing-sm $spacing-md;
+      padding: 10px 0;
+    }
+
+    .user-details__info-label {
+      min-width: 90px;
+      flex: 0 0 auto;
+      margin-right: $spacing-sm;
+      white-space: nowrap;
+    }
+
+    .user-details__info-value {
+      flex: 1 1 auto;
+      white-space: normal; // allow wrapping
+      word-break: break-word;
+    }
   }
 
   &__info-section--guarantor {
@@ -479,6 +508,43 @@
 
     @include mobile {
       min-height: auto;
+    }
+
+    // Add a divider line between the two guarantor grids
+    .user-details__info-grid + .user-details__info-grid {
+      margin-top: $spacing-xl;
+      padding-top: $spacing-xl;
+      border-top: 1px solid $border-color;
+    }
+
+    // Four columns to fit the guarantor fields neatly on one line
+    .user-details__info-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: $spacing-xl;
+      row-gap: $spacing-md;
+    }
+
+    // Inline label + value, allow wrap
+    .user-details__info-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; // evenly space label and value
+      flex-wrap: wrap;
+      gap: $spacing-sm $spacing-md;
+      padding: 10px 0;
+    }
+
+    .user-details__info-label {
+      min-width: 90px;
+      flex: 0 0 auto;
+      margin-right: $spacing-sm;
+      white-space: nowrap;
+    }
+
+    .user-details__info-value {
+      flex: 1 1 auto;
+      white-space: normal;
+      word-break: break-word;
     }
   }
 
@@ -544,6 +610,18 @@
     @include mobile {
       font-size: $font-size-sm;
     }
+  }
+
+  // Email values: keep on single line with ellipsis
+  &__info-value--email {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: inline-block;
+    min-width: 0; // allow flex item to shrink so ellipsis works
+    word-break: normal;
+    overflow-wrap: normal;
   }
 
   &__loading,
