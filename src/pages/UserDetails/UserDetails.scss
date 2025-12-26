@@ -528,7 +528,6 @@
     .user-details__info-item {
       display: flex;
       align-items: center;
-      justify-content: space-between; // evenly space label and value
       flex-wrap: wrap;
       gap: $spacing-sm $spacing-md;
       padding: 10px 0;
@@ -543,6 +542,7 @@
 
     .user-details__info-value {
       flex: 1 1 auto;
+      min-width: 0;
       white-space: normal;
       word-break: break-word;
     }
