@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 import "./Sidebar.scss";
 
 type IconName =
@@ -942,8 +943,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userDetails");
+    api.logout();
     navigate("/");
   };
 
