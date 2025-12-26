@@ -4,6 +4,29 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import "./Login.scss";
 
+/**
+ * Login Page Component
+ *
+ * Features:
+ * - Form validation for email and password fields
+ * - Real-time error messages for invalid credentials
+ * - Password visibility toggle (Show/Hide)
+ * - Session persistence: Auth token stored in localStorage
+ * - Protected routes: Session persists across page refreshes
+ * - Automatic logout: Cleared from localStorage on sidebar logout
+ *
+ * Password Requirements:
+ * - Email: Valid email format (must contain @ and .)
+ * - Password: Minimum 6 characters
+ *
+ * Credentials accepted (any email + password with 6+ chars):
+ * - Example: user@example.com / password123
+ *
+ * Session Storage:
+ * - Auth token: lendsqr_auth_token (generated on login)
+ * - Current user: lendsqr_current_user (email address)
+ * - Persists until: Manual logout or browser localStorage cleared
+ */
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -17,16 +40,18 @@ const Login: React.FC = () => {
   const validateForm = (): boolean => {
     const newErrors: { email?: string; password?: string } = {};
 
+    // Email validation
     if (!email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Email is invalid";
+      newErrors.email = "Email is invalid (example: user@example.com)";
     }
 
+    // Password validation - minimum 6 characters
     if (!password) {
       newErrors.password = "Password is required";
     } else if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
+      newErrors.password = `Password must be at least 6 characters (currently ${password.length})`;
     }
 
     setErrors(newErrors);
@@ -44,11 +69,14 @@ const Login: React.FC = () => {
       const result = await api.login(email, password);
 
       if (result.success) {
+        // Session successfully stored in localStorage
+        // Auth token and user email are persisted
         navigate("/dashboard");
       } else {
         setErrors({ password: result.message || "Login failed" });
       }
-    } catch {
+    } catch (error) {
+      console.error("Login error:", error);
       setErrors({ password: "An error occurred. Please try again." });
     } finally {
       setIsLoading(false);
